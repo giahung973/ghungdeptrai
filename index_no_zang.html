@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zang Vietsub | ghungdeptrai.com</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        header {
+            background-color: #e84118;
+            color: white;
+            padding: 20px;
+        }
+        nav {
+            background: #dcdde1;
+            padding: 10px;
+        }
+        nav a {
+            margin: 0 10px;
+            color: #000;
+            text-decoration: none;
+        }
+        .video-container {
+            padding: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        .video-container.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .video-responsive {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            margin-bottom: 10px;
+        }
+        .video-responsive iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        .video-title {
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        footer {
+            background: #2f3640;
+            color: #fff;
+            padding: 10px 0;
+            font-size: 14px;
+        }
+        .dark-mode {
+            background-color: #121212;
+            color: white;
+        }
+        .dark-mode header {
+            background-color: #333;
+        }
+        .dark-mode footer {
+            background-color: #222;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>ghungdeptrai.com</h1>
+        <p>Phim hoạt hình vietsub tổng hợp</p>
+    </header>
+
+    <nav>
+        <a href="#video">Video</a> |
+        <a href="#comment">Bình luận</a> |
+        <a href="#lienhe">Liên hệ</a>
+    </nav>
+
+    <button onclick="toggleDarkMode()">Chuyển chế độ tối/sáng</button>
+
+    <div style="margin: 20px;">
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://ghungdeptrai.com" target="_blank">Chia sẻ Facebook</a> |
+        <a href="https://zalo.me/share?url=https://ghungdeptrai.com" target="_blank">Chia sẻ Zalo</a>
+    </div>
+
+    <input type="text" id="searchInput" placeholder="Tìm video..." onkeyup="searchVideo()">
+
+    <div id="video" class="video-container">
+        <div class="video-responsive">
+            <iframe src="https://www.youtube.com/embed/33bCJBpHsZs" allowfullscreen></iframe>
+            <p class="video-title">[FULL] Chiến Thần Thế Giới Trở Lại | HOẠT HÌNH VIETSUB</p>
+        </div>
+        <div class="video-responsive">
+            <iframe src="https://www.youtube.com/embed/0llt0jrCTlw" allowfullscreen></iframe>
+            <p class="video-title">MONKEY KING | TẬP 16 - 17 | Zang Vietsub</p>
+        </div>
+        <div class="video-responsive">
+            <iframe src="https://www.youtube.com/embed/jYQpJGnUyTA" allowfullscreen></iframe>
+            <p class="video-title">[FULL] Tôi Tái Sinh Thành Tiểu Cường | HOẠT HÌNH VIETSUB</p>
+        </div>
+        <div class="video-responsive">
+            <iframe src="https://www.youtube.com/embed/piSXdJsEsko" allowfullscreen></iframe>
+            <p class="video-title">Luật Sư Bất Khả Chiến Bại | Phần 3 | Zang Vietsub</p>
+        </div>
+    </div>
+
+    <div id="comment" class="video-container">
+        <div class="fb-comments" data-href="https://ghungdeptrai.com" data-numposts="5" data-width="100%"></div>
+        <div id="fb-root"></div>
+        <script async defer crossorigin="anonymous" 
+        src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v17.0" nonce="ABC123"></script>
+    </div>
+
+    <p id="counter">Đang tải lượt truy cập...</p>
+
+    <footer id="lienhe">
+        &copy; 2025 ghungdeptrai.com. All rights reserved.
+    </footer>
+
+    <script>
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+        }
+
+        window.addEventListener('scroll', () => {
+            const videos = document.querySelectorAll('.video-container');
+            videos.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight) {
+                    el.classList.add('show');
+                }
+            });
+        });
+
+        function searchVideo() {
+            let input = document.getElementById('searchInput').value.toLowerCase();
+            let videos = document.querySelectorAll('.video-responsive');
+            videos.forEach(video => {
+                video.style.display = video.innerHTML.toLowerCase().includes(input) ? 'block' : 'none';
+            });
+        }
+
+        let count = localStorage.getItem('visitCount') || 0;
+        count++;
+        localStorage.setItem('visitCount', count);
+        document.getElementById('counter').textContent = "Bạn đã truy cập " + count + " lần.";
+    </script>
+</body>
+</html>
